@@ -23,10 +23,11 @@ jobs:
       with:
         repository: fiddlermikey/actions
         ref: ${{ env.TOOLS_BRANCH}}
-    - name: List
-      id: ls-workflows
-      run: |
-        ls -aR ./.github
+    - name: Upload workflow as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: workflowFile
+        path: ./.github/workflows/picker.yml
 
   #call-second-workflow:
   #  needs: [call-assign-from-json-workflow,download-second-workflow]
