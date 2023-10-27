@@ -23,9 +23,13 @@ jobs:
       with:
         repository: fiddlermikey/actions
         ref: ${{ env.TOOLS_BRANCH}}
+    - name: List
+      id: checkout-project
+      run: |
+        ls -aR ./.github
 
-  call-second-workflow:
-    needs: [call-assign-from-json-workflow,download-second-workflow]
-    uses: ./.github/workflows/picker.yml
-    with:
-      buildtype: ${{ needs.call-assign-from-json-workflow.outputs.name }}
+  #call-second-workflow:
+  #  needs: [call-assign-from-json-workflow,download-second-workflow]
+  #  uses: ./.github/workflows/picker.yml
+  #  with:
+  #    buildtype: ${{ needs.call-assign-from-json-workflow.outputs.name }}
