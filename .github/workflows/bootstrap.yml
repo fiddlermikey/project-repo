@@ -26,7 +26,7 @@ jobs:
     - name: List tools
       if:  needs.call-assign-from-json-workflow.outputs.name != ''        
       run: |
-        echo "Ref: "$tools-branch"
+        echo "Ref: $tools-branch"
 
     - name: Checkout tools repo
       id: get-tools
