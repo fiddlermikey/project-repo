@@ -45,6 +45,12 @@ jobs:
     - name: List tools
       if:  needs.call-assign-from-json-workflow.outputs.name != ''        
       id: run-action
+      run: |
+        ls -aR ./my-tools
+
+    - name: Call Workflow
+      if:  needs.call-assign-from-json-workflow.outputs.name != ''        
+      id: run-action
       uses: ./my-tools/.github/workflows/picker.yml
       with:
         buildtype: dotnet
