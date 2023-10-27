@@ -6,7 +6,7 @@ on:
   pull_request:
 
 env:
-  buildtype: dotnet
+  buildtype: "dotnet"
 
 jobs:
   set-environment:
