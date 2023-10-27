@@ -25,7 +25,6 @@ jobs:
 
   run-picker-workflow:
     needs: set-environment
-    runs-on: ubuntu-latest
     uses: fiddlermikey/actions/.github/workflows/picker.yml@main
     with:
       buildtype: ${{ env.buildtype }}
