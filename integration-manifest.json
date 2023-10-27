@@ -1,6 +1,6 @@
 {
   "$schema": "https://keyfactor.github.io/integration-manifest-schema.json",
-  "name": "MOST",
+  "name": "dotnet",
   "status": "production",
   "integration_type": "orchestrator",
   "description": "MOST (My Orchestrator Sample Testing) - Sample Project",
