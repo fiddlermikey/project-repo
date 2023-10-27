@@ -2,8 +2,8 @@ name: Bootstrap Workflow
 
 on: 
   workflow_dispatch:
-    push:
-    pull_request:
+  push:
+  pull_request:
 
 env:
   buildtype: dotnet
@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set Environment
-        run: echo "buildtype=${{ env.buildtype }}" >> $GITHUB_ENV
+        run: |
+          echo "buildtype=${{ env.buildtype }}" >> $GITHUB_ENV
 
   additional-job-1:
     runs-on: ubuntu-latest
