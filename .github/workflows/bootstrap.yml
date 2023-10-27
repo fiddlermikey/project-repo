@@ -53,5 +53,5 @@ jobs:
       if:  always()  
       id: ls-action
       run: |
-        ls -aR ./my-tools/.github/workflows/picker.yml | tee -a $GITHUB_STEP_SUMMARY
+        ls -aR ./.github/workflows/picker.yml | tee -a $GITHUB_STEP_SUMMARY
 
