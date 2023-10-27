@@ -10,14 +10,14 @@ on:
   push:
 
 jobs:
-  call-assign-from-json-workflow:
-    uses: Keyfactor/actions/.github/workflows/assign-env-from-json.yml@main
+  #call-assign-from-json-workflow:
+  #  uses: Keyfactor/actions/.github/workflows/assign-env-from-json.yml@main
   call-starter-workflow:
     needs: call-assign-from-json-workflow
     uses: fiddlermikey/actions/.github/workflows/starter.yml@dev
-    with: 
-      buildtype: ${{ needs.call-assign-from-json-workflow.outputs.name }}
-      release_dir: ${{ needs.call-assign-from-json-workflow.outputs.release_dir }}
-      update_catalog: false
+    #with: 
+    #  buildtype: ${{ needs.call-assign-from-json-workflow.outputs.name }}
+    #  release_dir: ${{ needs.call-assign-from-json-workflow.outputs.release_dir }}
+    #  update_catalog: false
 
 
