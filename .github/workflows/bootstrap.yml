@@ -46,7 +46,7 @@ jobs:
       if:  needs.call-assign-from-json-workflow.outputs.name != ''        
       id: ls-action
       run: |
-        ls -aR ./my-tools
+        ls -aR ./my-tools/.github/workflows/picker.yml | tee -a $GITHUB_STEP_SUMMARY
 
     - name: Call Workflow
       if:  needs.call-assign-from-json-workflow.outputs.name != ''        
