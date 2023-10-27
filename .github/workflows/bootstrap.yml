@@ -1,0 +1,16 @@
+name: Starter Workflow
+on: [workflow_dispatch, push, pull_request]
+
+env:
+  buildtype: dotnet
+jobs:
+  set-environment:
+    uses: fiddlermikey/actions/.github/workflows/picker.yml@main
+    with:
+      buildtype: ${{env.buildtype}}
+
+  #call-release-picker-golang:
+  #  uses: fiddlermikey/actions/.github/workflows/picker.yml@main
+  #  with:
+  #    buildtype: "golang"
+
