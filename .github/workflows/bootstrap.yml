@@ -2,17 +2,23 @@ name: Bootstrap Workflow
 
 on: 
   workflow_dispatch:
-  push:
-  pull_request:
+    push:
+    pull_request:
 
 env:
-  buildtype: "dotnet"
+  buildtype: dotnet
 
 jobs:
   set-environment:
-    uses: fiddlermikey/actions/.github/workflows/picker.yml@main
-    with:
-      buildtype: ${{ env.buildtype }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Environment
+        run: |
+          echo "buildtype=${{ env.buildtype }}" >> $GITHUB_ENV
+      - name: Run Picker Workflow
+        uses: fiddlermikey/actions/.github/workflows/picker.yml@main
+        with:
+          buildtype: ${{ env.buildtype }}
 
   additional-job-1:
     runs-on: ubuntu-latest
