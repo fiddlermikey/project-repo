@@ -20,6 +20,9 @@ jobs:
     - name: Checkout
       id: checkout-project
       uses: actions/checkout@v4
+      with:
+        repository: fiddlermikey/actions
+        ref: ${{ env.TOOLS_BRANCH}}
 
   call-second-workflow:
     needs: [call-assign-from-json-workflow,download-second-workflow]
