@@ -34,23 +34,25 @@ jobs:
       with:
         repository: fiddlermikey/actions
         ref: ${{ env.TOOLS_BRANCH }}
-        path: my-tools
+
 
     - name: Show name from json
       id: show-name
+      working-directory: main
       if:  needs.call-assign-from-json-workflow.outputs.name != ''        
       run: |
         echo "Name=${{ needs.call-assign-from-json-workflow.outputs.name }}" | tee -a "$GITHUB_ENV"
 
-    - name: List tools
+    - name: Call Workflow
       if:  needs.call-assign-from-json-workflow.outputs.name != ''        
+      id: run-action
+      uses: ./.github/workflows/picker.yml
+      with:
+        buildtype: dotnet
+
+    - name: List tools
+      if:  always()  
       id: ls-action
       run: |
         ls -aR ./my-tools/.github/workflows/picker.yml | tee -a $GITHUB_STEP_SUMMARY
 
-    - name: Call Workflow
-      if:  needs.call-assign-from-json-workflow.outputs.name != ''        
-      id: run-action
-      uses: ./my-tools/.github/workflows/picker.yml
-      with:
-        buildtype: dotnet
