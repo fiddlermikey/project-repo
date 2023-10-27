@@ -27,4 +27,4 @@ jobs:
     - name: Show name from json
       if:  needs.call-assign-from-json-workflow.outputs.name != ''        
       run: |
-        echo "Name=${{ needs.call-assign-from-json-workflow.outputs.release_dir }}" | tee -a "$GITHUB_ENV"
+        echo "Name=${{ needs.call-assign-from-json-workflow.outputs.name }}" | tee -a "$GITHUB_ENV"
