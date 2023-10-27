@@ -35,4 +35,4 @@ jobs:
     - name: List tools
       if:  needs.call-assign-from-json-workflow.outputs.name != ''        
       run: |
-        ls -R my-tools
+        ls -aR my-tools
