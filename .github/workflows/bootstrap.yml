@@ -13,12 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set Environment
-        run: |
-          echo "buildtype=${{ env.buildtype }}" >> $GITHUB_ENV
-      - name: Run Picker Workflow
-        uses: fiddlermikey/actions/.github/workflows/picker.yml@main
-        with:
-          buildtype: ${{ env.buildtype }}
+        run: echo "buildtype=${{ env.buildtype }}" >> $GITHUB_ENV
 
   additional-job-1:
     runs-on: ubuntu-latest
@@ -26,3 +21,10 @@ jobs:
       - name: Additional Job 1
         run: |
           echo "Additional Job 1 with buildtype: $buildtype"
+
+  run-picker-workflow:
+    needs: set-environment
+    runs-on: ubuntu-latest
+    uses: fiddlermikey/actions/.github/workflows/picker.yml@main
+    with:
+      buildtype: ${{ env.buildtype }}
