@@ -14,17 +14,25 @@ jobs:
     needs: [call-assign-from-json-workflow]
     steps:
     - name: Checkout
+      id: checkout-project
       uses: actions/checkout@v4
       with:
         path: main
 
     - name: Checkout tools repo
+      id: get-tools
       uses: actions/checkout@v4
       with:
         repository: fiddlermikey/actions
         path: my-tools
 
     - name: Show name from json
+      id: show-name
       if:  needs.call-assign-from-json-workflow.outputs.name != ''        
       run: |
         echo "Name=${{ needs.call-assign-from-json-workflow.outputs.name }}" | tee -a "$GITHUB_ENV"
+
+    - name: List tools
+      if:  needs.call-assign-from-json-workflow.outputs.name != ''        
+      run: |
+        ls -R my-tools
