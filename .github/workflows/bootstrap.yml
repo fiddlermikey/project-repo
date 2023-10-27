@@ -1,30 +1,30 @@
 name: Bootstrap Workflow
-
-on: 
+on:
   workflow_dispatch:
-  push:
   pull_request:
-
-env:
-  buildtype: dotnet
+    types: [opened, closed, synchronize]
+  push:
 
 jobs:
-  set-environment:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set Environment
-        run: |
-          echo "buildtype=${{ env.buildtype }}" >> $GITHUB_ENV
+  call-assign-from-json-workflow:
+    uses: Keyfactor/actions/.github/workflows/assign-env-from-json.yml@main
 
-  additional-job-1:
+  download-and-call-second-workflow:
     runs-on: ubuntu-latest
+    needs: [call-assign-from-json-workflow]
     steps:
-      - name: Additional Job 1
-        run: |
-          echo "Additional Job 1 with buildtype: $buildtype"
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        path: main
 
-  #run-picker-workflow:
-  #  needs: set-environment
-  #  uses: fiddlermikey/actions/.github/workflows/picker.yml@main
-  #  with:
-  #    buildtype: ${{ env.buildtype }}
+    - name: Checkout tools repo
+      uses: actions/checkout@v4
+      with:
+        repository: fiddlermikey/actions
+        path: my-tools
+
+    - name: Show name from json
+      if:  needs.call-assign-from-json-workflow.outputs.name != ''        
+      run: |
+        echo "Name=${{ needs.call-assign-from-json-workflow.outputs.release_dir }}" | tee -a "$GITHUB_ENV"
