@@ -16,15 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     name: Detect Primary Language
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.SDK_SYNC_PAT}}
+      #- name: Checkout
+      #  uses: actions/checkout@v4
+      #  with:
+      #    token: ${{ secrets.GH_PAT}}
       - name: Read primary language
         id: read
         uses: fiddlermikey/action-get-primary-language@v1
         with:
-          token: ${{ secrets.SDK_SYNC_PAT}}
+          token: ${{ secrets.GH_PAT}}
       - name: Display type
         id: display
         run: |
