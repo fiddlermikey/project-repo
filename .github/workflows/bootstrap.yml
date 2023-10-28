@@ -10,8 +10,26 @@ on:
   push:
 
 jobs:
-  #call-assign-from-json-workflow:
-  #  uses: Keyfactor/actions/.github/workflows/assign-env-from-json.yml@main
+  read_type:
+    outputs:
+      primaryLanguage: ${{ steps.read.outputs.primary_language }}
+    runs-on: ubuntu-latest
+    name: Detect Primary Language
+    steps:
+      #- name: Checkout
+      #  uses: actions/checkout@v4
+      #  with:
+      #    token: ${{ secrets.SDK_SYNC_PAT}}
+      - name: Read primary language
+        id: read
+        uses: fiddlermikey/action-get-primary-language@v1
+        with:
+          token: ${{ secrets.SDK_SYNC_PAT}}
+      - name: Display type
+        id: display
+        run: |
+          echo ${{ steps.read.outputs.primary_language}} | tee -a $GITHUB_STEP_SUMMARY
+
   call-starter-workflow:
     uses: fiddlermikey/actions/.github/workflows/starter.yml@dev
     #with: 
