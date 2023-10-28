@@ -11,6 +11,9 @@ on:
 
 jobs:
   call-starter-workflow:
-    uses: fiddlermikey/actions/.github/workflows/starter.yml@dev
+    uses: keyfactor/actions/.github/workflows/starter.yml@support-hotfixes
+    secrets:
+      token: ${{ secrets.SDK_SYNC_PAT}}
+      
 
 
