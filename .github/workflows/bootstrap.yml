@@ -40,16 +40,20 @@ jobs:
         with:
           files: ".goreleaser.yaml"
 
-      - name: File exists
-        if: steps.check_files.outputs.files_exists == 'true'
-        # Only runs if all of the files exists
-        run: echo file exists!
+      #- name: File exists
+      #  if: steps.check_files.outputs.files_exists == 'true'
+      #  # Only runs if all of the files exists
+      #  run: echo file exists!
 
   verbose-output:
     runs-on: ubuntu-latest
+    if: file_existence.outputs.yaml-exists
     needs: read_type
     name: Verbose Output
     steps:
+    - name: verbose-output
+      run: |
+        echo ${{ needs.read_type.outputs.primaryLanguage }}
     - name: verbose-output
       run: |
         echo ${{ needs.read_type.outputs.primaryLanguage }}
