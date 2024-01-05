@@ -47,8 +47,8 @@ jobs:
 
   verbose-output:
     runs-on: ubuntu-latest
-    if: file_existence.outputs.yaml-exists
-    needs: read_type
+    if: needs.file_existence.outputs.yaml-exists
+    needs: [read_type,file_existence]
     name: Verbose Output
     steps:
     - name: verbose-output
