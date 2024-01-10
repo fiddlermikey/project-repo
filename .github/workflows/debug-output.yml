@@ -14,11 +14,14 @@ jobs:
       PUSH_IMAGE: ${{ steps.set-release-prop.outputs.PUSH_IMAGE }}  
     steps:
       - name: set-release-prop
+        id: set-release-prop
         run: |
-          echo "PUSH_IMAGE=true" | tee -a "$GITHUB_ENV" | tee -a "$GITHUB_OUTPUT"  | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "PUSH_IMAGE=true" >> $GITHUB_ENV
+          echo "PUSH_IMAGE=true" >> $GITHUB_OUTPUT
+          echo "PUSH_IMAGE=true" >> $GITHUB_STEP_SUMMARY
       - name: display-release-prop
         run: |
-          echo "set-release-prop:PUSH_IMAGE = ${{ env.PUSH_IMAGE}}"
+          echo "set-release-prop:PUSH_IMAGE = ${{ env.PUSH_IMAGE }}"
   get-release-values:
     name: Get Release Properties
     runs-on: ubuntu-latest
@@ -26,4 +29,4 @@ jobs:
     steps:
       - name: get-output-release-prop
         run: |
-          echo "get-release-prop:PUSH_IMAGE = ${{ needs.set-release-values.outputs.PUSH_IMAGE}}"
+          echo "get-release-prop:PUSH_IMAGE = ${{ needs.set-release-values.outputs.PUSH_IMAGE }}"
