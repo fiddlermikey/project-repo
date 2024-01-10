@@ -16,8 +16,7 @@ jobs:
       - name: set-release-prop
         id: set-release-prop
         run: |
-          echo "PUSH_IMAGE=true" >> $GITHUB_ENV
-          echo "PUSH_IMAGE=true" >> $GITHUB_OUTPUT
+          echo "PUSH_IMAGE=true" | tee -a $GITHUB_ENV | tee -a $GITHUB_OUTPUT
           echo "PUSH_IMAGE=true" >> $GITHUB_STEP_SUMMARY
       - name: display-release-prop
         run: |
