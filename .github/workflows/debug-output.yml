@@ -1,0 +1,29 @@
+name: Bootstrap Workflow
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, closed, synchronize]
+  push:
+
+jobs:
+  set-release-values:
+    name: Set Release Properties
+    runs-on: ubuntu-latest
+    outputs:
+      PUSH_IMAGE: ${{ steps.set-release-prop.outputs.PUSH_IMAGE }}  
+    steps:
+      - name: set-release-prop
+        run: |
+          echo "PUSH_IMAGE=true" | tee -a "$GITHUB_ENV" | tee -a "$GITHUB_OUTPUT"  | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: display-release-prop
+        run: |
+          echo "set-release-prop:PUSH_IMAGE = ${{ env.PUSH_IMAGE}}"
+  get-release-values:
+    name: Get Release Properties
+    runs-on: ubuntu-latest
+    needs: set-release-values
+    steps:
+      - name: get-output-release-prop
+        run: |
+          echo "get-release-prop:PUSH_IMAGE = ${{ needs.set-release-values.outputs.PUSH_IMAGE}}"
