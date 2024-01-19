@@ -1,8 +1,5 @@
 name: Bootstrap Workflow
 
-env:
-  TOOLS_BRANCH: dev
-
 on:
   workflow_dispatch:
   pull_request:
