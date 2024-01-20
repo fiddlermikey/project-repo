@@ -16,12 +16,11 @@ jobs:
       - name: get-is-release
         run: |
           echo "PUSH_IMAGE=true" | tee -a $GITHUB_ENV | tee -a $GITHUB_OUTPUT  | tee -a $GITHUB_STEP_SUMMARY
-          echo "VERSION=1.1.0" | tee -a $GITHUB_ENV  | tee -a $GITHUB_OUTPUT | tee -a $GITHUB_STEP_SUMMARY
   merge:
     runs-on: ubuntu-latest
     needs: get-release-values
     steps:
-      - name: Set IMAGE_NAME
+      - name: Chech PUSH_IMAGE value
         run: |
           echo "PUSH_IMAGE = ${{ needs.get-release-values.outputs.PUSH_IMAGE }}"
 
