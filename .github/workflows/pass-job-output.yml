@@ -18,7 +18,7 @@ jobs:
           echo "PUSH_IMAGE=true" | tee -a $GITHUB_ENV | tee -a $GITHUB_OUTPUT  | tee -a $GITHUB_STEP_SUMMARY
       - name: output-output
         run: |
-          echo "GITHUB_OUTPUT = $GITHUB_OUTPUT""
+          echo "GITHUB_OUTPUT = $GITHUB_OUTPUT"
   merge:
     runs-on: ubuntu-latest
     needs: get-release-values
