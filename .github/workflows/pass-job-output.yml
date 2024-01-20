@@ -1,4 +1,4 @@
-name: Bootstrap Workflow
+name: Passing Outputs
 
 on:
   workflow_dispatch:
