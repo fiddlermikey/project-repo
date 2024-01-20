@@ -6,9 +6,6 @@ on:
     types: [opened, closed, synchronize]
   push:
 
-env:
-  REGISTRY: ghcr.io
-
 jobs:
   get-release-values:
     name: Get Release Properties
