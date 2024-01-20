@@ -16,9 +16,7 @@ jobs:
       - name: Set PUSH_IMAGE variable
         id: set-vars
         run: |
-          echo "PUSH_IMAGE=true" >> $GITHUB_ENV
-          echo "PUSH_IMAGE=${{ github.event.inputs.PUSH_IMAGE }}" >> $GITHUB_OUTPUTS
-        # Additional steps if needed
+          echo "PUSH_IMAGE=true" >> $GITHUB_OUTPUT
 
   merge:
     runs-on: ubuntu-latest
