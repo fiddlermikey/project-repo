@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: get-release-values
     steps:
-      - name: Chech PUSH_IMAGE value
+      - name: Check PUSH_IMAGE value
         run: |
           echo "PUSH_IMAGE = ${{ needs.get-release-values.outputs.PUSH_IMAGE }}"
 
