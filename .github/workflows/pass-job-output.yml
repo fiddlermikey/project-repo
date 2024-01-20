@@ -11,18 +11,19 @@ jobs:
     name: Get Release Properties
     runs-on: ubuntu-latest
     outputs:
-      PUSH_IMAGE: ${{ steps.set-vars.outputs.PUSH_IMAGE }}
+      PUSH_IMAGE: ${{ needs.set-vars.outputs.PUSH_IMAGE }}
     steps:
       - name: Set PUSH_IMAGE variable
         id: set-vars
         run: |
           echo "PUSH_IMAGE=true" >> $GITHUB_ENV
-      # Additional steps if needed
+          echo "PUSH_IMAGE=${{ github.event.inputs.PUSH_IMAGE }}" >> $GITHUB_OUTPUTS
+        # Additional steps if needed
 
   merge:
     runs-on: ubuntu-latest
-    needs: get-release-values
+    needs: set-vars
     steps:
       - name: Check PUSH_IMAGE value
         run: |
-          echo "PUSH_IMAGE = ${{ needs.get-release-values.outputs.PUSH_IMAGE }}"
+          echo "PUSH_IMAGE = ${{ needs.set-vars.outputs.PUSH_IMAGE }}"
