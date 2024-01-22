@@ -18,6 +18,14 @@ jobs:
         run: |
           echo "PUSH_IMAGE=true" >> "$GITHUB_OUTPUT"
 
+  merge-no-env:
+    runs-on: ubuntu-latest
+    needs: get-release-values
+    steps:
+      - name: Check PUSH_IMAGE value
+        run: |
+          echo "PUSH_IMAGE = ${{needs.get-release-values.outputs.PUSH_IMAGE}}"
+
   merge:
     runs-on: ubuntu-latest
     needs: get-release-values
@@ -28,18 +36,18 @@ jobs:
         run: |
           echo "PUSH_IMAGE = $PUSH_IMAGE"
 
-  job1:
-    runs-on: ubuntu-latest
-    # Map a step output to a job output
-    outputs:
-      PUSH_IMAGE: ${{ steps.step2.outputs.PUSH_IMAGE }}
-    steps:
-      - id: step2
-        run: echo "PUSH_IMAGE=world" >> "$GITHUB_OUTPUT"
-  job2:
-    runs-on: ubuntu-latest
-    needs: job1
-    steps:
-      - env:
-          PUSH_IMAGE: ${{needs.job1.outputs.PUSH_IMAGE}}
-        run: echo "PUSH_IMAGE =  $PUSH_IMAGE"
+  #job1:
+  #  runs-on: ubuntu-latest
+  #  # Map a step output to a job output
+  #  outputs:
+  #    PUSH_IMAGE: ${{ steps.step2.outputs.PUSH_IMAGE }}
+  #  steps:
+  #    - id: step2
+  #      run: echo "PUSH_IMAGE=world" >> "$GITHUB_OUTPUT"
+  #job2:
+  #  runs-on: ubuntu-latest
+  #  needs: job1
+  #  steps:
+  #    - env:
+  #        PUSH_IMAGE: ${{needs.job1.outputs.PUSH_IMAGE}}
+  #      run: echo "PUSH_IMAGE =  $PUSH_IMAGE"
