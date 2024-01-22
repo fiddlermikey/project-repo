@@ -17,6 +17,7 @@ jobs:
         id: set-vars
         run: |
           echo "PUSH_IMAGE=true" |tee -a "$GITHUB_OUTPUT" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "VERSION=0.0.0" | tee -a "$GITHUB_OUTPUT" | tee -a "$GITHUB_STEP_SUMMARY"
 
   merge:
     runs-on: ubuntu-latest
