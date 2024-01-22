@@ -46,4 +46,4 @@ jobs:
       - env:
           OUTPUT1: ${{needs.job1.outputs.output_1}}
           PUSH_IMAGE: ${{needs.job1.outputs.PUSH_IMAGE}}
-        run: echo "$OUTPUT1 PUSH_IMAGE"
+        run: echo "$OUTPUT1 $PUSH_IMAGE"
