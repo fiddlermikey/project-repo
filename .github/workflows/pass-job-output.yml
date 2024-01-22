@@ -16,7 +16,7 @@ jobs:
       - name: Set PUSH_IMAGE variable
         id: set-vars
         run: |
-          echo "PUSH_IMAGE=true" >> "$GITHUB_OUTPUT"
+          echo "PUSH_IMAGE=true" |tee -a "$GITHUB_OUTPUT" | tee -a "$GITHUB_STEP_SUMMARY"
 
   merge:
     runs-on: ubuntu-latest
