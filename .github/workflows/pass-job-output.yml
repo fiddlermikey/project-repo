@@ -11,7 +11,7 @@ jobs:
     name: Get Release Properties
     runs-on: ubuntu-latest
     outputs:
-      PUSH_IMAGE: ${{ needs.set-vars.outputs.PUSH_IMAGE }}
+      PUSH_IMAGE: ${{ steps.set-vars.outputs.PUSH_IMAGE }}
     steps:
       - name: Set PUSH_IMAGE variable
         id: set-vars
@@ -32,11 +32,8 @@ jobs:
     runs-on: ubuntu-latest
     # Map a step output to a job output
     outputs:
-      output_1: ${{ steps.step1.outputs.test }}
       PUSH_IMAGE: ${{ steps.step2.outputs.PUSH_IMAGE }}
     steps:
-      - id: step1
-        run: echo "test=hello" >> "$GITHUB_OUTPUT"
       - id: step2
         run: echo "PUSH_IMAGE=world" >> "$GITHUB_OUTPUT"
   job2:
@@ -44,6 +41,5 @@ jobs:
     needs: job1
     steps:
       - env:
-          OUTPUT1: ${{needs.job1.outputs.output_1}}
           PUSH_IMAGE: ${{needs.job1.outputs.PUSH_IMAGE}}
-        run: echo "$OUTPUT1 $PUSH_IMAGE"
+        run: echo "PUSH_IMAGE =  $PUSH_IMAGE"
