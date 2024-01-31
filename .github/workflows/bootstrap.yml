@@ -20,8 +20,8 @@ jobs:
       - name: Read primary language
         id: read
         run: |
-          echo "type=`cat integration-manifest.json | jq '.name'`" | tee -a $GITHUB_OUTPUT | tee -a $GITHUB_STEP_SUMMARY
-      - name: Display type
+          echo "name=`cat integration-manifest.json | jq '.name'`" | tee -a $GITHUB_OUTPUT | tee -a $GITHUB_STEP_SUMMARY
+      - name: Display name
         id: display
         run: |
           echo "Name: ${{ steps.read.outputs.name}}" | tee -a $GITHUB_STEP_SUMMARY
