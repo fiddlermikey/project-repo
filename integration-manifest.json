@@ -2,7 +2,7 @@
   "$schema": "https://keyfactor.github.io/integration-manifest-schema.json",
   "name": "Reading json directly",
   "status": "pilot",
-  "integration_type": "api-client",
+  "integration_type": "pam",
   "description": "Reading json directly without separate action",
   "support_level": "community",
   "link_github": false,
@@ -11,7 +11,6 @@
   "about": {
     "orchestrator": {
       "UOFramework": "10.1",
-      "pam_support": true,
       "win": {
         "supportsCreateStore": true,
         "supportsDiscovery": true,

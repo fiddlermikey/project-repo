@@ -7,6 +7,9 @@ on:
   push:
 
 jobs:
+  call-assign-from-json-workflow:
+    uses: Keyfactor/actions/.github/workflows/assign-env-from-json.yml@ab#54256-fix-pam
+
   read_properties:
     outputs:
       name: ${{ steps.read.outputs.name }}
