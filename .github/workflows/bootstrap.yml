@@ -7,62 +7,26 @@ on:
   push:
 
 jobs:
-  read_type:
+  read_properties:
     outputs:
-      primaryLanguage: ${{ steps.read.outputs.primary_language }}
+      name: ${{ steps.read.outputs.name }}
     runs-on: ubuntu-latest
     name: Detect Primary Language
     steps:
       - name: Read primary language
         id: read
-        uses: fiddlermikey/action-get-primary-language@v1.0
-        with:
-          token: ${{ secrets.GH_PAT}}
+        run: |
+          echo "type=`cat integration-manifest.json | jq '.name'`" | tee -a $GITHUB_OUTPUT | tee -a | $GITHUB_STEP_SUMMARY
       - name: Display type
         id: display
         run: |
-          echo ${{ steps.read.outputs.primary_language}} | tee -a $GITHUB_STEP_SUMMARY
-
-  file_exists:
-    runs-on: ubuntu-latest
-    outputs:
-      yaml-exists: ${{ steps.check_files.outputs.files_exists}}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Check file existence
-        id: check_files
-        uses: andstor/file-existence-action@v2
-        with:
-          files: ".goreleaser.y*ml"
-
-      #- name: File exists
-      #  if: steps.check_files.outputs.files_exists == 'true'
-      #  # Only runs if all of the files exists
-      #  run: echo file exists!
+          echo "Name: ${{ steps.read.outputs.name}}" | tee -a $GITHUB_STEP_SUMMARY
 
   debug:
     runs-on: ubuntu-latest
-    needs: [file_exists]
+    needs: [read_properties]
     name: Debug Output
     steps:
     - name: debug-output
       run: |
-        echo ${{ needs.file_exists.outputs.yaml-exists }}
-
-  verbose-output:
-    runs-on: ubuntu-latest
-    if: needs.file_exists.outputs.yaml-exists == 'true'
-    needs: [read_type,file_exists]
-    name: Verbose Output
-    steps:
-    - name: verbose-output
-      run: |
-        echo ${{ needs.read_type.outputs.primaryLanguage }}
-    - name: verbose-output
-      run: |
-        echo ${{ needs.read_type.outputs.primaryLanguage }}
-  #call-starter-workflow:
-  #  uses: fiddlermikey/actions/.github/workflows/starter.yml@dev
-
+        echo ${{ needs.read_properties.outputs.name }}
