@@ -2,7 +2,7 @@
   "$schema": "https://keyfactor.github.io/integration-manifest-schema.json",
   "name": "Reading json directly",
   "status": "pilot",
-  "integration_type": "pam",
+  "integration_type": "orchestrator",
   "description": "Reading json directly without separate action",
   "support_level": "community",
   "link_github": false,
