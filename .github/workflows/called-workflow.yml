@@ -34,7 +34,7 @@ jobs:
           repository: 'fiddlermikey/project-repo'
           path: './actions/'
           token: ${{ secrets.token }}
-          ref: 'pass-branch' # Update this tag for testing new readme templates branches
+          ref: ${{ github.ref_name }} # Update this tag for testing new readme templates branches
       - name: Output Context Info
         run: |
           echo "github.action_ref: ${{ github.action_ref }}" | tee -a $GITHUB_STEP_SUMMARY
