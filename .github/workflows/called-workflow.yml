@@ -4,10 +4,11 @@ env:
   TOOLS_BRANCH: dev
 
 on:
-  workflow_dispatch:
-  pull_request:
-    types: [opened, closed, synchronize]
-  push:
+  workflow_call:
+    secrets:
+      token: 
+        description: 'Secret token from caller workflow to approve readme'
+        required: true
 
 jobs:
   checkout:
