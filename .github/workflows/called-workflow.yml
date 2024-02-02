@@ -11,6 +11,14 @@ on:
         required: true
 
 jobs:
+  dump_contexts_to_log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT" | tee -a $GITHUB_STEP_SUMMARY
+
   checkout:
     runs-on: ubuntu-latest
 
@@ -27,3 +35,7 @@ jobs:
           path: './actions/'
           token: ${{ secrets.token }}
           ref: 'pass-branch' # Update this tag for testing new readme templates branches
+      - name: Output Context Info
+        run: |
+          echo "github.action_ref: ${{ github.action_ref }}" | tee -a $GITHUB_STEP_SUMMARY
+          echo "github.ref_name: ${{ github.ref_name }}" | tee -a $GITHUB_STEP_SUMMARY
