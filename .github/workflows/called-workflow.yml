@@ -28,7 +28,7 @@ jobs:
         with:
           token: ${{ secrets.token }}
 
-      - name: checkout-project
+      - name: checkout-actions
         uses: actions/checkout@v4
         with:
           repository: 'fiddlermikey/project-repo'
