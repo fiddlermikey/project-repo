@@ -1,0 +1,28 @@
+name: Bootstrap Workflow
+
+env:
+  TOOLS_BRANCH: dev
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, closed, synchronize]
+  push:
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout-project
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.token }}
+
+      - name: checkout-project
+        uses: actions/checkout@v4
+        with:
+          repository: 'fiddlermikey/project-repo'
+          path: './actions/'
+          token: ${{ secrets.token }}
+          ref: 'pass-branch' # Update this tag for testing new readme templates branches
